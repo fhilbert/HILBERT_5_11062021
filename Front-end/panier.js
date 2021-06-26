@@ -1,10 +1,12 @@
 // panier.js
+console.log("panier");
 
 // teddy class
 class Teddy {
-	constructor(id, image, name, price) {
+	constructor(id, image, nom, price) {
 		this.id = id;
-		this.name = name;
+		this.image = image;
+		this.nom = nom;
 		this.price = price;
 	}
 }
@@ -14,18 +16,19 @@ class UI {
 	static displayTeddies() {
 		const teddies = Store.getTeddies();
 		console.log(teddies);
-
 		teddies.forEach((teddy) => UI.addTeddyToList(teddy));
+		console.log(document.body);
 	}
 	static addTeddyToList(teddy) {
-		const list = document.querySelector("#teddy-list");
+		const list = document.querySelector("#basket-list");
 
 		const row = document.createElement("tr");
-		//console.log("name " + teddy.name);
 
 		row.innerHTML = `<td>${teddy.id}</td>
-		    <td>${teddy.image}</td>
-		    <td>${teddy.name}</td>
+            <td>
+              <img src=${teddy.image} alt="Card image cap" width=60px height= 60px class="">
+            </td>
+		    <td>${teddy.nom}</td>
 		    <td>${teddy.price}</td>
 		    <td><a href="#" class="btn btn-danger btn-sm
 		     delete"><i class="far fa-trash-alt"></i></a></td>`;
@@ -126,3 +129,4 @@ document.getElementById("basket-list").addEventListener("click", (e) => {
 	// show success message
 	UI.showAlert("Teddy removed", "success");
 });
+UI.displayTeddies();
