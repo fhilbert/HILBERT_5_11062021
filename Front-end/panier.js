@@ -39,12 +39,16 @@ class UI {
 		    <td>${teddy.nom}</td>
 		    <td>${teddy.price}</td>
 		    <td><a href="#" class="btn btn-danger btn-sm
-		     delete"><i class="far fa-trash-alt"></i></a></td>`;
+		     "><i class="far fa-trash-alt delete"></i></a></td>`;
 		list.appendChild(row);
 	}
 	static deleteTeddy(el) {
+		console.log("delete");
+		console.log("el " + el.classList);
+
 		if (el.classList.contains("delete")) {
-			el.parentElement.parentElement.remove();
+			console.log("delete");
+			el.parentElement.parentElement.parentElement.remove();
 		}
 	}
 	static showAlert(message, className) {
@@ -64,13 +68,6 @@ class UI {
 class Store {
 	static getTeddies() {
 		let teddies = [];
-		console.log(
-			"teddies : " +
-				teddies +
-				" local " +
-				localStorage.getItem("teddies") +
-				"/////"
-		);
 
 		if (localStorage.getItem("teddies") === null) {
 			teddies = [];
@@ -89,9 +86,8 @@ class Store {
 
 	static removeTeddy(id) {
 		const teddies = Store.getTeddies();
-
 		teddies.forEach((teddy, index) => {
-			if (teddies.id === id) {
+			if (teddies[index].id === id) {
 				teddies.splice(index, 1);
 			}
 		});
@@ -102,37 +98,20 @@ class Store {
 // Event : Display Teddies
 document.addEventListener("DOMContentLoaded", UI.displayTeddies);
 
-// Event : Add a teddy
-// // document.querySelector("#teddy-form").addEventListener("submit", (e) => {
-// // 	// prevent actual submit
-// // 	e.preventDefault();
-// // 	// get form values
-// // 	const title = document.querySelector("#title").value;
-// // 	const author = document.querySelector("#author").value;
-// // 	const isbn = document.querySelector("#isbn").value;
-
-// // 	// validate
-// // 	if (title === "" || author === "" || isbn === "") {
-// // 		UI.showAlert("Please fill in all fields", "danger");
-// // 	} else {
-// // 		UI.showAlert("Teddy added", "success");
-// // 		// instatiate teddy
-// // 		const teddy = new Teddy(title, author, isbn);
-// // 		console.log(teddy);
-// // 		// add Teddy to UI
-// // 		UI.addTeddyToList(teddy);
-// // 		// add teddy to store
-// // 		Store.addTeddy(teddy);
-// // 	}
 // // });
 
 // Event : Remove a Teddy
 document.getElementById("basket-list").addEventListener("click", (e) => {
-	// remove teddy from UI
+	console.log(e.target); // remove teddy from UI
 	UI.deleteTeddy(e.target);
 	// remove teddy from store
-	Store.removeTeddy(e.target.parentElement.previousElementSibling.textContent);
-	console.log(e.target.parentElement.previousElementSibling.textContent);
+	console.log("-------");
+	console.log(
+		e.target.parentElement.parentElement.parentElement.firstChild.textContent
+	);
+	Store.removeTeddy(
+		e.target.parentElement.parentElement.parentElement.firstChild.textContent
+	);
 
 	// show success message
 	UI.showAlert("Teddy removed", "success");
