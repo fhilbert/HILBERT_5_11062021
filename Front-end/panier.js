@@ -15,8 +15,16 @@ class Teddy {
 class UI {
 	static displayTeddies() {
 		const teddies = Store.getTeddies();
+		console.log("----");
 		console.log(teddies);
 		teddies.forEach((teddy) => UI.addTeddyToList(teddy));
+		console.log(teddies.length);
+		let total = 0;
+		for (let i = 0; i < teddies.length; i++) {
+			total += Number(teddies[i].price.substring(0, 2));
+		}
+		const Total = document.querySelector("#total");
+		Total.innerText = `Total : ${total} €`;
 		console.log(document.body);
 	}
 	static addTeddyToList(teddy) {

@@ -88,11 +88,11 @@ class UI {
 		//  delete"><i class="far fa-trash-alt"></i></a></td>`;
 		// list.appendChild(row);
 	}
-	static deleteTeddy(el) {
-		if (el.classList.contains("delete")) {
-			el.parentElement.parentElement.remove();
-		}
-	}
+	// static deleteTeddy(el) {
+	// if (el.classList.contains("delete")) {
+	// el.parentElement.parentElement.remove();
+	// }
+	//}
 	static showAlert(message, className) {
 		const div = document.createElement("div");
 		div.className = `alert alert-${className}`;
@@ -140,7 +140,8 @@ document.querySelector("#order").addEventListener("click", (e) => {
 	e.preventDefault();
 	console.log(document.body);
 	console.log(document.querySelector("h5"));
-	const id = document.querySelector("#ref").innerText;
+	const id = document.querySelector("#ref").innerText.substring(6);
+	//id = id.substring(6);
 	const image = document.querySelector("#imageUrl").src;
 	const nom = document.querySelector("h5").innerText;
 	const price = document.querySelector("#price").innerText;
