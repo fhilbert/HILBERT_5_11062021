@@ -58,18 +58,42 @@
                             <div id="price" class="col-1"></div>
                             <div class="col-2">€</div>
                             <div id=color class="col-6"></div>
-                            <div class="form-group d-lg-flex col-2 text-center align-items-center">
+                            <div class="form-group d-lg-flex col-3 text-center align-items-center">
                                 <label for="nbArticles">Qté :</label>
-                                <input type="text" id="nbArticles" value=1 class="form-control mb-3">
+                                <input type="number" id="nbArticles" value=1 class="form-control mb-3">
                             </div>
 
                             <div id=nbArticles class="col-3 mx-5"></div>
 
                         </div>
                         <div class="row mt-5">
+                            <!-- Button trigger modal -->
                             <input id="order" type="submit" value="Commander" class="btn btn-primary col-4 col-lg-4">
                             <p id="ref" class="card-text col-6 col-lg-6"></p>
+
+                            <button href="panier.html" class="btn btn-primary col-6 mx-3" id="addToCard"
+                                data-toggle="modal" data-target="#modal">Ajouter au panier</button>
+                            <!-- Modal -->
+                            <!-- <button id="modal-btn" class="button">Click Here</button> -->
+
+                            <div id="modal" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header mx-auto">
+                                            <h2>Produit ajouté au panier !</h2>
+                                        </div>
+                                        <div class="modal-body text-center d-flex flex-column mx-auto">
+                                            <p>Que souhaitez vous faire ?</p>
+                                            <button id="modalbtn" data-dismiss="modal"
+                                                class="btn bg-secondary">Continuez mes achats</button>
+                                            <a id="modalbtn" href="panier.html" class="btn btn-dark mt-2">Aller au
+                                                panier</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <p id="ref" class="card-text col-12"></p>
                     </div>
                 </div>
             </div>

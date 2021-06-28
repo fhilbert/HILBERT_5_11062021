@@ -128,4 +128,7 @@ document.querySelector("#order").addEventListener("click", (e) => {
 	console.log(teddy);
 	// add teddy to store
 	Store.addTeddy(teddy);
+	// on continue ?
+	const modal = document.querySelector("#modal");
+	modal.style.display = "block";
 });
