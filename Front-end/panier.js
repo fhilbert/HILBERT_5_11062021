@@ -8,6 +8,7 @@ class Teddy {
 		this.image = image;
 		this.nom = nom;
 		this.price = price;
+		this.nbArticles = nbArticles;
 	}
 }
 
@@ -15,21 +16,17 @@ class Teddy {
 class UI {
 	static displayTeddies() {
 		const teddies = Store.getTeddies();
-		console.log("----");
 		console.log(teddies);
 		teddies.forEach((teddy) => UI.addTeddyToList(teddy));
-		console.log(teddies.length);
 		let total = 0;
 		for (let i = 0; i < teddies.length; i++) {
 			total += Number(teddies[i].price.substring(0, 2));
 		}
 		const Total = document.querySelector("#total");
 		Total.innerText = `Total : ${total} €`;
-		console.log(document.body);
 	}
 	static addTeddyToList(teddy) {
 		const list = document.querySelector("#basket-list");
-
 		const row = document.createElement("tr");
 
 		row.innerHTML = `<td>${teddy.id}</td>
@@ -38,16 +35,13 @@ class UI {
             </td>
 		    <td>${teddy.nom}</td>
 		    <td>${teddy.price}</td>
+		    <td>${teddy.nbArticles}</td>
 		    <td><a href="#" class="btn btn-danger btn-sm
 		     "><i class="far fa-trash-alt delete"></i></a></td>`;
 		list.appendChild(row);
 	}
 	static deleteTeddy(el) {
-		console.log("delete");
-		console.log("el " + el.classList);
-
 		if (el.classList.contains("delete")) {
-			console.log("delete");
 			el.parentElement.parentElement.parentElement.remove();
 		}
 	}
@@ -68,7 +62,6 @@ class UI {
 class Store {
 	static getTeddies() {
 		let teddies = [];
-
 		if (localStorage.getItem("teddies") === null) {
 			teddies = [];
 			console.log("teddies : " + teddies);
@@ -98,17 +91,12 @@ class Store {
 // Event : Display Teddies
 document.addEventListener("DOMContentLoaded", UI.displayTeddies);
 
-// // });
-
 // Event : Remove a Teddy
 document.getElementById("basket-list").addEventListener("click", (e) => {
 	console.log(e.target); // remove teddy from UI
 	UI.deleteTeddy(e.target);
+
 	// remove teddy from store
-	console.log("-------");
-	console.log(
-		e.target.parentElement.parentElement.parentElement.firstChild.textContent
-	);
 	Store.removeTeddy(
 		e.target.parentElement.parentElement.parentElement.firstChild.textContent
 	);

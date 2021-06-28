@@ -7,11 +7,12 @@ const urlObj = new URL(url);
 const id = urlObj.searchParams.get("id");
 
 class Teddy {
-	constructor(id, image, nom, price) {
+	constructor(id, image, nom, price, nbArticles) {
 		this.id = id;
 		this.image = image;
 		this.nom = nom;
 		this.price = price;
+		this.nbArticles = nbArticles;
 	}
 }
 
@@ -19,7 +20,6 @@ console.log("id " + id);
 let body = document.querySelector("body");
 body.style.backgroundColor = "#f0e3ed";
 getTeddy();
-// console.log("data " + data);
 
 //  document.querySelector("#order").addEventListener("click", choix);
 
@@ -42,7 +42,8 @@ function getTeddy() {
 			let price = document.querySelector("#price");
 
 			price.innerText = teddy.price.toFixed(2) / 100;
-			price.innerText += " €";
+			//price.innerText += " €";
+
 			let color = `<label for="choix-select">Couleurs:</label>
 			<select name="choix" id="choix-select">
 			`;
@@ -53,14 +54,16 @@ function getTeddy() {
 					color += ` <option value="${teddy.colors[i]}">${teddy.colors[i]}</option>`;
 				}
 			}
+
 			let ref = document.querySelector("#ref");
 			ref.innerText = `Ref :  ${teddy._id}`;
 
 			document.getElementById("color").innerHTML = color;
+			document.getElementById("nbArticles").innerHTML = nbArticles;
+
 			let cardbody = document.querySelector(".card-body");
 			cardbody.style.backgroundColor = "#e3a8d5";
 			console.log("getTeddy " + teddy);
-			return 5;
 		});
 }
 
@@ -69,30 +72,9 @@ function getTeddy() {
 // UI class : handle UI Tasks
 class UI {
 	static displayTeddies() {
-		// localStorage.clear();
 		const teddies = Store.getTeddies();
 		console.log(teddies);
-
-		teddies.forEach((teddy) => UI.addTeddyToList(teddy));
 	}
-	static addTeddyToList(teddy) {
-		//const list = document.querySelector("#teddy-list");
-		//const row = document.createElement("tr");
-		//console.log("name " + teddy.name);
-		//concerne le panier
-		// row.innerHTML = `<td>${teddy.id}</td>
-		// <td>${teddy.image}</td>
-		// <td>${teddy.name1}</td>
-		// <td>${teddy.price}</td>
-		// <td><a href="#" class="btn btn-danger btn-sm
-		//  delete"><i class="far fa-trash-alt"></i></a></td>`;
-		// list.appendChild(row);
-	}
-	// static deleteTeddy(el) {
-	// if (el.classList.contains("delete")) {
-	// el.parentElement.parentElement.remove();
-	// }
-	//}
 	static showAlert(message, className) {
 		const div = document.createElement("div");
 		div.className = `alert alert-${className}`;
@@ -110,13 +92,6 @@ class UI {
 class Store {
 	static getTeddies() {
 		let teddies = [];
-		console.log(
-			"teddies : " +
-				teddies +
-				" local " +
-				localStorage.getItem("teddies") +
-				"/////"
-		);
 
 		if (localStorage.getItem("teddies") === null) {
 			teddies = [];
@@ -126,7 +101,6 @@ class Store {
 		}
 		return teddies;
 	}
-
 	static addTeddy(teddy) {
 		const teddies = Store.getTeddies();
 		teddies.push(teddy);
@@ -144,16 +118,14 @@ document.querySelector("#order").addEventListener("click", (e) => {
 	//id = id.substring(6);
 	const image = document.querySelector("#imageUrl").src;
 	const nom = document.querySelector("h5").innerText;
-	const price = document.querySelector("#price").innerText;
+	const price = Number(document.querySelector("#price").innerText);
+	const nbArticles = Number(document.querySelector("#nbArticles").value);
 
 	// validate
 	UI.showAlert("Teddy added", "success");
 	// instatiate teddy
-	const teddy = new Teddy(id, image, nom, price);
+	const teddy = new Teddy(id, image, nom, price, nbArticles);
 	console.log(teddy);
 	// add teddy to store
 	Store.addTeddy(teddy);
 });
-// // // show success message
-// // UI.showAlert("Teddy removed", "success");
-// // });
