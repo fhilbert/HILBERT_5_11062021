@@ -96,18 +96,17 @@ function addTeddy(teddy) {
 	// checking if it is in local storage
 	let a = "false";
 	for (let i = 0; i < teddies.length; i++) {
-		if (teddies[i].id === id) {
+		if (teddies[i].id === id && teddies[i].color === teddy.color) {
 			teddies[i].nbArticles += teddy.nbArticles;
 			a = "true";
 		}
 	}
 
-	if (a === "true") {
-		localStorage.setItem("teddies", JSON.stringify(teddies));
-	} else {
+	if (a !== "true") {
 		teddies.push(teddy);
-		localStorage.setItem("teddies", JSON.stringify(teddies));
 	}
+
+	localStorage.setItem("teddies", JSON.stringify(teddies));
 }
 
 // Event : Add a teddy
