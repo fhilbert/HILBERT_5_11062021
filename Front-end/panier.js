@@ -14,17 +14,21 @@ class Teddy {
 }
 
 // Functions
-function displayTeddies() {
-	const teddies = getTeddies();
-	console.log(teddies);
-	teddies.forEach((teddy) => addTeddyToList(teddy));
-	// creer fonction total
+function basketTotal(teddies) {
 	let total = 0;
 	for (let i = 0; i < teddies.length; i++) {
 		total += teddies[i].price * teddies[i].nbArticles;
 	}
 	const totalElt = document.querySelector("#total");
 	totalElt.innerText = total;
+}
+
+function displayTeddies() {
+	const teddies = getTeddies();
+	console.log(teddies);
+	teddies.forEach((teddy) => addTeddyToList(teddy));
+	// creer fonction total
+	basketTotal(teddies);
 }
 function addTeddyToList(teddy) {
 	const list = document.querySelector("#basket-list");
@@ -58,7 +62,7 @@ function showAlert(message, className) {
 	setTimeout(() => document.querySelector(".alert").remove(), 3000);
 }
 
-// Store class : Handles storage
+// Handles Local storage
 
 function getTeddies() {
 	let teddies = [];
@@ -92,13 +96,15 @@ document.addEventListener("DOMContentLoaded", displayTeddies);
 
 // Event : Remove a Teddy
 document.getElementById("basket-list").addEventListener("click", (e) => {
-	console.log(e.target); // remove teddy from UI
+	console.log(e.target);
+	// remove teddy
 	deleteTeddy(e.target);
-
 	// remove teddy from store
 	removeTeddy(
 		e.target.parentElement.parentElement.parentElement.firstChild.textContent
 	);
+	//calcul total
+	basketTotal(getTeddies());
 
 	// show success message
 	showAlert("Teddy removed", "success");
