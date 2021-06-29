@@ -11,40 +11,42 @@
 </head>
 
 <body>
-    <header>
-        <div class="bg-light">
-            <div class="row">
-                <nav class="col navbar navbar-expand-lg navbar-light" style="background-color: #f0e3ed">
-                    <!-- <a class="navbar-brand" href="index.html">
-                        <img src="logo.png" width="180" height="80" alt="Info Logo">
-                    </a> -->
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div id="navbarContent" class="collapse navbar-collapse justify-content-center">
-                        <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link active" href="index.html">Accueil </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="panier.html">Panier</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
     <main>
-        <div class="bloc bg-banniere">
-            <div class="row tight-width-whitespace">
-                <div class="col-sm-12">
-                    <img src="soft-toys.jpg" class="center-block image-resize-mode" width=100% alt="Peluches">
+        <header>
+            <div class="row ">
+                <div class="col text-center" style=" background-color: #f0e3ed">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="logo.png" width="140" height="60" alt="Orinoco logo">
+                    </a>
                 </div>
             </div>
-            <!-- </div> -->
-        </div>
+
+            <div class="bg-light">
+                <div class="row">
+                    <nav class="col navbar navbar-expand-lg navbar-light" style="background-color: #f0e3ed">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div id="navbarContent" class="collapse navbar-collapse justify-content-center">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link active" href="index.html">Accueil </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="panier.html">Panier</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="col">
+                <img src="soft-toys.jpg" class="center-block image-resize-mode" height=650px width=100% alt="Peluches">
+            </div>
+
+        </header>
+
         <div class="container ">
             <div class="row my-3">
                 <div class="col text-center">
@@ -61,10 +63,10 @@
                             <div class="row mt-4">
                                 <div id="price" class="col-1"></div>
                                 <div class="col-2">€</div>
-                                <div id=color class="col-6"></div>
-                                <div class="form-group d-lg-flex col-3 text-center align-items-center">
+                                <div id=color class="col-5"></div>
+                                <div class="form-group d-lg-flex col-3  align-items-center">
                                     <label for="nbArticles">Qté :</label>
-                                    <input type="number" id="nbArticles" value=1 class="form-control mb-3">
+                                    <input type="number" id="nbArticles" value=1 class="form-control">
                                 </div>
 
                                 <div id=nbArticles class="col-3 mx-5"></div>
@@ -89,7 +91,7 @@
                                                 <p>Que souhaitez vous faire ?</p>
                                                 <button id="modalbtn" data-dismiss="modal"
                                                     class="btn bg-secondary">Continuez mes achats</button>
-                                                <a id="modalbtn" href="panier.html" class="btn btn-dark mt-2">Aller au
+                                                <a id="modalbtn2" href="panier.html" class="btn btn-dark mt-2">Aller au
                                                     panier</a>
                                             </div>
                                         </div>

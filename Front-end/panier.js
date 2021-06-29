@@ -20,10 +20,10 @@ class UI {
 		teddies.forEach((teddy) => UI.addTeddyToList(teddy));
 		let total = 0;
 		for (let i = 0; i < teddies.length; i++) {
-			total += Number(teddies[i].price.substring(0, 2));
+			total += teddies[i].price * teddies[i].nbArticles;
 		}
 		const Total = document.querySelector("#total");
-		Total.innerText = `Total : ${total} €`;
+		Total.innerText = total;
 	}
 	static addTeddyToList(teddy) {
 		const list = document.querySelector("#basket-list");
