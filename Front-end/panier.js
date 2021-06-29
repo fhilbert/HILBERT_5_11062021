@@ -3,10 +3,11 @@ console.log("panier");
 
 // teddy class
 class Teddy {
-	constructor(id, image, nom, price, nbArticles) {
+	constructor(id, image, nom, color, price, nbArticles) {
 		this.id = id;
 		this.image = image;
 		this.nom = nom;
+		this.color = color;
 		this.price = price;
 		this.nbArticles = nbArticles;
 	}
@@ -29,11 +30,12 @@ function addTeddyToList(teddy) {
 	const list = document.querySelector("#basket-list");
 	const row = document.createElement("tr");
 
-	row.innerHTML = `
+	row.innerHTML = `<td>${teddy.id}</td>
             <td>
               <img src=${teddy.image} alt="Card image cap" width=60px height= 60px class="">
             </td>
 		    <td>${teddy.nom}</td>
+		    <td>${teddy.color}</td>
 		    <td>${teddy.nbArticles}</td>
 		    <td>${teddy.price}</td>
 		    <td><a href="#" class="btn btn-danger btn-sm

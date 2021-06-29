@@ -7,10 +7,11 @@ const urlObj = new URL(url);
 const id = urlObj.searchParams.get("id");
 
 class Teddy {
-	constructor(id, image, nom, price, nbArticles) {
+	constructor(id, image, nom, color, price, nbArticles) {
 		this.id = id;
 		this.image = image;
 		this.nom = nom;
+		this.color = color;
 		this.price = price;
 		this.nbArticles = nbArticles;
 	}
@@ -43,7 +44,7 @@ function getTeddy() {
 			//price.innerText += " €";
 
 			let color = `<label for="choix-select">Couleurs:</label>
-			<select name="choix" id="choix-select">
+			<select name="choix" id="choix-select" onchange="getColor();">
 			`;
 			for (let i = 0; i < teddy.colors.length; i++) {
 				if (i === 0) {
@@ -52,7 +53,6 @@ function getTeddy() {
 					color += ` <option value="${teddy.colors[i]}">${teddy.colors[i]}</option>`;
 				}
 			}
-
 			let ref = document.querySelector("#ref");
 			ref.innerText = `Ref :  ${teddy._id}`;
 
@@ -107,16 +107,17 @@ document.querySelector("#order").addEventListener("click", (e) => {
 	console.log(document.body);
 	console.log(document.querySelector("h5"));
 	const id = document.querySelector("#ref").innerText.substring(6);
-	//id = id.substring(6);
 	const image = document.querySelector("#imageUrl").src;
 	const nom = document.querySelector("h5").innerText;
+	//const color = "green";
+	const color = getColor();
 	const price = Number(document.querySelector("#price").innerText);
 	const nbArticles = Number(document.querySelector("#nbArticles").value);
 
 	// validate
 	showAlert("Teddy added", "success");
 	// instatiate teddy
-	const teddy = new Teddy(id, image, nom, price, nbArticles);
+	const teddy = new Teddy(id, image, nom, color, price, nbArticles);
 	console.log(teddy);
 	// add teddy to store
 	addTeddy(teddy);
@@ -124,3 +125,8 @@ document.querySelector("#order").addEventListener("click", (e) => {
 	const modal = document.querySelector("#modal");
 	modal.style.display = "block";
 });
+function getColor() {
+	var selectValue = document.getElementById("choix-select").value;
+	console.log("couleur " + selectValue);
+	return selectValue;
+}

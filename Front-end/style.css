@@ -4,3 +4,6 @@ body {
 .card-body {
 	background-color: #e3a8d5;
 }
+.reference {
+	display: none;
+}
