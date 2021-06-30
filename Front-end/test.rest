@@ -1,6 +1,32 @@
-GET  http://localhost:3000/api/teddies
+post  http://localhost:3000/api/teddies/order
+Content-Type: application/json
+
+{
+    "contact":{
+        "firstName":"hilbert",
+        "lastName":"hilbert",
+        "email":"hilbert",
+        "address":"hilbert",
+        "city":"hilbert"
+    },
+    "products": ["5beaacd41c9d440000a57d97","5beaaa8f1c9d440000a57d95"]
+}
 ###
-GET http://localhost:3000/api/cameras
 
+POST http://localhost:3000/api/teddies/order
+Content-Type: application/json
 
+{
+   "contact": {
+       "firstName": "hioj",
+       "lastName": "hioj",
+       "email": "hioj",
+       "address": "hioj",
+       "city": "hioj"
+   },
+   "products": [
+       "5beaabe91c9d440000a57d96",
+       "5beaabe91c9d440000a57d96"
+   ]
+}
 

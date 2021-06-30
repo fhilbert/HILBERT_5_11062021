@@ -90,6 +90,25 @@ function removeTeddy(id) {
 	});
 	localStorage.setItem("teddies", JSON.stringify(teddies));
 }
+// Add Name Adress
+ function contactInfo(){
+	let contact = {
+		"firstName" : null,
+		"lastName" : null,
+		"email" : null,
+		"address" : null,
+		"city" : null
+		}
+	contact.firstName = document.getElementById("firstName").value;	
+	contact.lastName = document.getElementById("lastName").value;	
+	contact.email = document.getElementById("email").value;	
+	contact.adress = document.getElementById("address").value;	
+	contact.city = document.getElementById("city").value;	
+	console.log(contact)
+	localStorage.setItem("contact", JSON.stringify(contact));
+
+
+ }
 
 // Event : Display Teddies
 document.addEventListener("DOMContentLoaded", displayTeddies);
@@ -110,3 +129,4 @@ document.getElementById("basket-list").addEventListener("click", (e) => {
 	showAlert("Teddy removed", "success");
 });
 displayTeddies();
+contactInfo();
