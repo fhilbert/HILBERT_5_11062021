@@ -15,7 +15,9 @@ fetch("http://localhost:3000/api/teddies")
 					    <div class="card-body">
 					      <h5 class="card-title">${teddy.name}</h5>
 					      <p class="card-text">Prix : ${teddy.price.toFixed(2) / 100} €</p>
-					      <a href="produit.html?id=${teddy._id}" class="stretched-link"></a>
+					      <a href="\Front-end&#x5Cproduit.html?id=${
+									teddy._id
+								}" class="stretched-link"></a>
 					    </div>
 					  </div>
 					</div>`;
