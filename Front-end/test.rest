@@ -29,4 +29,7 @@ Content-Type: application/json
        "5beaabe91c9d440000a57d96"
    ]
 }
+### 
+GET https://anapioficeandfire.com/api/
+
 

@@ -92,20 +92,19 @@ function removeTeddy(id) {
 }
 // Add Name Adress
  function contactInfo(){
-	let contact = {
-		"firstName" : null,
-		"lastName" : null,
-		"email" : null,
-		"address" : null,
-		"city" : null
-		}
-	contact.firstName = document.getElementById("firstName").value;	
-	contact.lastName = document.getElementById("lastName").value;	
-	contact.email = document.getElementById("email").value;	
-	contact.adress = document.getElementById("address").value;	
-	contact.city = document.getElementById("city").value;	
-	console.log(contact)
+	let contact = {	
+		"firstName" : document.getElementById("firstName").value,
+		"lastName" : document.getElementById("lastName").value,
+		"email" : document.getElementById("email").value,
+		"address" : document.getElementById("address").value,
+		"city" : document.getElementById("city").value
+		
+	}
+	console.log(contact);
 	localStorage.setItem("contact", JSON.stringify(contact));
+
+	window.location.href="confirmation.html";
+	
 
 
  }
@@ -128,5 +127,16 @@ document.getElementById("basket-list").addEventListener("click", (e) => {
 	// show success message
 	showAlert("Teddy removed", "success");
 });
+
+// Event : Submit Contact info
+document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
+	console.log("Valider Contact")
+	contactInfo();
+	console.log("Valider Contact")
+
+	
+
+});
+
+
 displayTeddies();
-contactInfo();
