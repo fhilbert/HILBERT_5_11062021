@@ -1,0 +1,5 @@
+GET https://restcountries.eu/rest/v2
+###
+GET https://restcountries.eu/data/afg.svg
+###
+GET https://restcountries.eu/rest/v2/name=Afghanistan

@@ -63,7 +63,7 @@ function displayTeddies() {
 }
 function showAlert(message, className) {
 	const div = document.createElement("div");
-	div.className = `alert alert-${className}`;
+	div.className = `text-center col-6 alert alert-${className}`;
 	div.appendChild(document.createTextNode(message));
 	const container = document.querySelector(".container");
 	const form = document.getElementById("teddy-form");
@@ -123,7 +123,7 @@ document.querySelector("#order").addEventListener("click", (e) => {
 
 	//vérification existence
 	// validate
-	showAlert("Teddy added", "success");
+	showAlert("Produit ajouté", "success");
 	// instatiate teddy
 	const teddy = new Teddy(id, image, nom, color, price, nbArticles);
 	console.log(teddy);

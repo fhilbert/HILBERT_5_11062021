@@ -31,5 +31,7 @@ Content-Type: application/json
 }
 ### 
 GET https://anapioficeandfire.com/api/
+###
+GET  http://localhost:3000/api/teddies/?price=2900
 
 

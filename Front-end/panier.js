@@ -90,8 +90,42 @@ function removeTeddy(id) {
 	});
 	localStorage.setItem("teddies", JSON.stringify(teddies));
 }
-// Add Name Adress
- function contactInfo(){
+function checkOrder(){
+	const teddies = JSON.parse(localStorage.getItem("teddies"));
+	const contact = JSON.parse(localStorage.getItem("contact"));
+	//const order = localStorage.getItem("order");
+
+	let products =[];
+	for(let i=0; i<teddies.length; i++){
+		// output += ` ${teddies[i].id}`;
+		products.push(teddies[i].id);
+	} 
+	// 
+	const jsonBody =  {
+		"contact": contact,
+		"products": products
+	};
+	console.log(jsonBody);
+	const url = "http://localhost:3000/api/teddies/order";
+	fetch(url, {
+		method: "POST",
+		headers: { 
+			'Accept': 'application/json', 
+			'Content-Type': 'application/json' 
+		},
+		body: JSON.stringify(jsonBody)
+	})
+	.then((res) => res.json())
+	.then (data => {
+		console.log(data.orderId);
+		localStorage.setItem("order",data.orderId);
+	});
+}
+function writeTotal(){
+	const total = document.getElementById("total").innerText;
+	localStorage.setItem("total", total);
+}
+function contactInfo(){
 	let contact = {	
 		"firstName" : document.getElementById("firstName").value,
 		"lastName" : document.getElementById("lastName").value,
@@ -101,13 +135,8 @@ function removeTeddy(id) {
 		
 	}
 	console.log(contact);
-	localStorage.setItem("contact", JSON.stringify(contact));
-
-	window.location.href="confirmation.html";
-	
-
-
- }
+	localStorage.setItem("contact", JSON.stringify(contact));	
+}
 
 // Event : Display Teddies
 document.addEventListener("DOMContentLoaded", displayTeddies);
@@ -120,21 +149,22 @@ document.getElementById("basket-list").addEventListener("click", (e) => {
 	// remove teddy from store
 	removeTeddy(
 		e.target.parentElement.parentElement.parentElement.firstChild.textContent
-	);
-	//calcul total
-	basketTotal(getTeddies());
-
-	// show success message
-	showAlert("Teddy removed", "success");
-});
-
-// Event : Submit Contact info
-document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
-	console.log("Valider Contact")
-	contactInfo();
-	console.log("Valider Contact")
-
+		);
+		//calcul total
+		basketTotal(getTeddies());
+		
+		// show success message
+		showAlert("Teddy removed", "success");
+	});
 	
+	// Event : Submit Contact info
+	document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
+		console.log("Valider Contact");
+		// validation info contact
+		writeTotal();
+		contactInfo();
+		checkOrder();
+		window.location.href="confirmation.html";
 
 });
 
