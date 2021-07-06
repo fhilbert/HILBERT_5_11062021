@@ -105,14 +105,15 @@ function checkOrder(){
 	};
 	console.log(jsonBody);
 	const url = "http://localhost:3000/api/teddies/order";
-	fetch(url, {
+	const options = {
 		method: "POST",
 		headers: { 
-			'Accept': 'application/json', 
-			'Content-Type': 'application/json' 
+			"Accept": "application/json", 
+			"Content-Type": "application/json" 
 		},
 		body: JSON.stringify(jsonBody)
-	})
+	};
+	fetch(url, options)
 	.then((res) => res.json())
 	.then (data => {
 		console.log(data.orderId);
