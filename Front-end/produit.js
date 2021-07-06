@@ -22,8 +22,6 @@ function getTeddy() {
 	fetch("http://localhost:3000/api/teddies/" + id)
 		.then((res) => res.json())
 		.then((teddy) => {
-			// 	// test
-
 			console.log(teddy);
 
 			let h1 = document.querySelector("h1");
@@ -53,17 +51,18 @@ function getTeddy() {
 			document.getElementById("nbArticles").innerHTML = nbArticles;
 
 			console.log("getTeddy " + teddy);
-		});
+		})
+		.catch(error => console.log("Erreur : " + error));
 }
 
-// UI class : handle UI Tasks
+//  handle Tasks
 function displayTeddies() {
 	const teddies = getTeddies();
 	console.log(teddies);
 }
 function showAlert(message, className) {
 	const div = document.createElement("div");
-	div.className = `text-center col-6 alert alert-${className}`;
+	div.className = `alert alert-${className}`;
 	div.appendChild(document.createTextNode(message));
 	const container = document.querySelector(".container");
 	const form = document.getElementById("teddy-form");
@@ -119,17 +118,20 @@ document.querySelector("#order").addEventListener("click", (e) => {
 	const nom = document.querySelector("h5").innerText;
 	const color = getColor();
 	const price = Number(document.querySelector("#price").innerText);
-	const nbArticles = Number(document.querySelector("#nbArticles").value);
+	let nbArticles = Number(document.querySelector("#nbArticles").value);
 
 	//vérification existence
 	// validate
+	if  (nbArticles<=0){
+		nbArticles = 1;
+	}
 	showAlert("Produit ajouté", "success");
 	// instatiate teddy
 	const teddy = new Teddy(id, image, nom, color, price, nbArticles);
 	console.log(teddy);
 	// add teddy to store
 	addTeddy(teddy);
-	// on continue ?
+	// continue ?
 	const modal = document.querySelector("#modal");
 	modal.style.display = "block";
 });

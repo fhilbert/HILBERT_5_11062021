@@ -24,4 +24,5 @@ fetch("http://localhost:3000/api/teddies")
 		});
 		output += `</div>`;
 		document.getElementById("output").innerHTML = output;
-	});
+	})
+	.catch(error => console.log("Erreur : " + error));

@@ -12,7 +12,7 @@ class Teddy {
 		this.nbArticles = nbArticles;
 	}
 }
-
+let error = null;
 // Functions
 function basketTotal(teddies) {
 	let total = 0;
@@ -93,11 +93,9 @@ function removeTeddy(id) {
 function checkOrder(){
 	const teddies = JSON.parse(localStorage.getItem("teddies"));
 	const contact = JSON.parse(localStorage.getItem("contact"));
-	//const order = localStorage.getItem("order");
 
 	let products =[];
 	for(let i=0; i<teddies.length; i++){
-		// output += ` ${teddies[i].id}`;
 		products.push(teddies[i].id);
 	} 
 	// 
@@ -119,7 +117,8 @@ function checkOrder(){
 	.then (data => {
 		console.log(data.orderId);
 		localStorage.setItem("order",data.orderId);
-	});
+	})
+	.catch(error => console.log("Erreur : " + error));
 }
 function writeTotal(){
 	const total = document.getElementById("total").innerText;
@@ -143,7 +142,6 @@ document.addEventListener("DOMContentLoaded", displayTeddies);
 
 // Event : Remove a Teddy
 document.getElementById("basket-list").addEventListener("click", (e) => {
-	console.log(e.target);
 	// remove teddy
 	deleteTeddy(e.target);
 	// remove teddy from store
@@ -157,14 +155,43 @@ document.getElementById("basket-list").addEventListener("click", (e) => {
 		showAlert("Teddy removed", "success");
 	});
 	
-	// Event : Submit Contact info
-	document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
-		console.log("Valider Contact");
-		// validation info contact
+// Event : Submit Contact info
+document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+	console.log("Valider Contact");
+	// validation info contact
+	// dataUser validation
+	if(!city.value || city.validity.typeMismatch){
+		error = "Merci de renseigner votre ville";
+	};
+	if(!cp.value || cp.validity.patternMismatch){
+		error = "Merci de renseigner un code postal valide";
+	};
+	if(!address.value || address.validity.patternMismatch){
+		error = "Merci de renseigner votre adresse";
+	};
+	if(tel.validity.typeMismatch){
+		error = "Votre numéro doit être composé exclusivement de chiffres";
+	};
+	if(!firstName.value || firstName.validity.patternMismatch){
+		error = "Merci de renseigner votre prénom";
+		};
+	if(!lastName.value || lastName.validity.patternMismatch){
+		error = "Merci de renseigner votre Nom";
+		};
+	if(!email.value || email.validity.patternMismatch){
+		error = "Merci de renseigner une adresse email valide";
+		};
+	if (error){
+		document.querySelector("#error").innerHTML= error;
+		error = null;
+	} else {
 		writeTotal();
 		contactInfo();
 		checkOrder();
 		window.location.href="confirmation.html";
+	};
+	// ----------------------
 
 });
 
