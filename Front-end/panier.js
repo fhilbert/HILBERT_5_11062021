@@ -96,7 +96,9 @@ function checkOrder(){
 
 	let products =[];
 	for(let i=0; i<teddies.length; i++){
-		products.push(teddies[i].id);
+		for(j=0;j < teddies[i].nbArticles;j++){
+			products.push(teddies[i].id);
+		}
 	} 
 	// 
 	const jsonBody =  {
@@ -118,6 +120,9 @@ function checkOrder(){
 	.then (data => {
 		console.log(data.orderId);
 		localStorage.setItem("order",data.orderId);
+		//
+		window.location.href="confirmation.html";
+
 	})
 	.catch(error => console.log("Erreur : " + error));
 }
@@ -164,24 +169,39 @@ document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
 	// dataUser validation
 	if(!city.value || city.validity.typeMismatch){
 		error = "Merci de renseigner votre ville";
+		const city = document.getElementById("city")
+		city.style.backgroundColor="#fdecec";
+
 	};
 	if(!cp.value || cp.validity.patternMismatch){
 		error = "Merci de renseigner un code postal valide";
+		const cp = document.getElementById("cp")
+		cp.style.backgroundColor="#fdecec";
 	};
 	if(!address.value || address.validity.patternMismatch){
 		error = "Merci de renseigner votre adresse";
+		const address = document.getElementById("address")
+		address.style.backgroundColor="#fdecec";
 	};
 	if(tel.validity.typeMismatch){
 		error = "Votre numéro doit être composé exclusivement de chiffres";
+		const tel = document.getElementById("tel")
+		tel.style.backgroundColor="#fdecec";
 	};
 	if(!firstName.value || firstName.validity.patternMismatch){
 		error = "Merci de renseigner votre prénom";
-		};
+		const firstname = document.getElementById("firstName")
+		firstname.style.backgroundColor="#fdecec";
+	};
 	if(!lastName.value || lastName.validity.patternMismatch){
 		error = "Merci de renseigner votre Nom";
-		};
+		const nom = document.getElementById("lastName")
+		nom.style.backgroundColor="#fdecec";
+	};
 	if(!email.value || email.validity.patternMismatch){
 		error = "Merci de renseigner une adresse email valide";
+		const email = document.getElementById("email")
+		email.style.backgroundColor="#fdecec";
 		};
 	if (error){
 		document.querySelector("#error").innerHTML= error;
@@ -190,7 +210,7 @@ document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
 		writeTotal();
 		contactInfo();
 		checkOrder();
-		window.location.href="confirmation.html";
+		// window.location.href="confirmation.html";
 	};
 	// ----------------------
 
