@@ -1,3 +1,5 @@
+GET http://localhost:3000/api/teddies/
+###
 post  http://localhost:3000/api/teddies/order
 Content-Type: application/json
 
@@ -32,6 +34,7 @@ Content-Type: application/json
 ### 
 GET https://anapioficeandfire.com/api/
 ###
-GET  http://localhost:3000/api/teddies/?price=2900
+GET  https://api.github.com/users/fhilbert
+
 
 

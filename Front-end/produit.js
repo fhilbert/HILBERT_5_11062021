@@ -1,8 +1,10 @@
 // produit.js
 
+// get the id from the URL params
 const url = window.location.href;
 const urlObj = new URL(url);
 const id = urlObj.searchParams.get("id");
+
 
 class Teddy {
 	constructor(id, image, nom, color, price, nbArticles) {
@@ -15,15 +17,14 @@ class Teddy {
 	}
 }
 
-console.log("id " + id);
+// console.log("id " + id);
 getTeddy();
 
+// Fetch the chosen teddy from the API and create the card to display
 function getTeddy() {
 	fetch("http://localhost:3000/api/teddies/" + id)
 		.then((res) => res.json())
 		.then((teddy) => {
-			console.log(teddy);
-
 			let h1 = document.querySelector("h1");
 			h1.innerText = teddy.name;
 			let imageUrl = document.getElementById("imageUrl");
@@ -35,6 +36,7 @@ function getTeddy() {
 			let price = document.querySelector("#price");
 			price.innerText = teddy.price.toFixed(2) / 100;
 
+			// Create select with colors available
 			let color = `<label for="choix-select">Couleurs:</label>
 			<select name="choix" id="choix-select" onchange="getColor();">`;
 			for (let i = 0; i < teddy.colors.length; i++) {
@@ -49,35 +51,27 @@ function getTeddy() {
 
 			document.getElementById("color").innerHTML = color;
 			document.getElementById("nbArticles").innerHTML = nbArticles;
-
-			console.log("getTeddy " + teddy);
 		})
 		.catch(error => console.log("Erreur : " + error));
 }
 
 //  handle Tasks
-function displayTeddies() {
-	const teddies = getTeddies();
-	console.log(teddies);
-}
 function showAlert(message, className) {
-	const div = document.createElement("div");
-	div.className = `alert alert-${className}`;
-	div.appendChild(document.createTextNode(message));
-	const container = document.querySelector(".container");
-	const form = document.getElementById("teddy-form");
-	container.insertBefore(div, form);
+	const div = document.getElementById("message");
+	div.className = `mt-3 alert alert-${className}`;
+	div.innerHTML = message;
 	// vanish in 3 seconds
 	setTimeout(() => document.querySelector(".alert").remove(), 3000);
 }
 function getColor() {
-	var selectValue = document.getElementById("choix-select").value;
+	let selectValue = document.getElementById("choix-select").value;
 	console.log("couleur " + selectValue);
 	return selectValue;
 }
 
 // Handles storage
 
+// get teddies from the local storage
 function getTeddies() {
 	let teddies = [];
 
@@ -89,10 +83,10 @@ function getTeddies() {
 	}
 	return teddies;
 }
+// check if the teddy exists then push it in teddies and the local storage
 function addTeddy(teddy) {
-	console.log(teddy.nbArticles);
+	// console.log(teddy.nbArticles);
 	const teddies = getTeddies();
-	// checking if it is in local storage
 	let a = "false";
 	for (let i = 0; i < teddies.length; i++) {
 		if (teddies[i].id === id && teddies[i].color === teddy.color) {
@@ -100,11 +94,9 @@ function addTeddy(teddy) {
 			a = "true";
 		}
 	}
-
 	if (a !== "true") {
 		teddies.push(teddy);
 	}
-
 	localStorage.setItem("teddies", JSON.stringify(teddies));
 }
 
@@ -112,7 +104,7 @@ function addTeddy(teddy) {
 document.querySelector("#order").addEventListener("click", (e) => {
 	// prevent actual submit
 	e.preventDefault();
-	console.log(document.body);
+	// console.log(document.body);
 	const id = document.querySelector("#ref").innerText.substring(6);
 	const image = document.querySelector("#imageUrl").src;
 	const nom = document.querySelector("h5").innerText;
@@ -120,15 +112,13 @@ document.querySelector("#order").addEventListener("click", (e) => {
 	const price = Number(document.querySelector("#price").innerText);
 	let nbArticles = Number(document.querySelector("#nbArticles").value);
 
-	//vérification existence
-	// validate
 	if  (nbArticles<=0){
 		nbArticles = 1;
 	}
 	showAlert("Produit ajouté", "success");
 	// instatiate teddy
 	const teddy = new Teddy(id, image, nom, color, price, nbArticles);
-	console.log(teddy);
+	
 	// add teddy to store
 	addTeddy(teddy);
 	// continue ?

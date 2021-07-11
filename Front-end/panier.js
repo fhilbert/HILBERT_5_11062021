@@ -25,7 +25,7 @@ function basketTotal(teddies) {
 
 function displayTeddies() {
 	const teddies = getTeddies();
-	console.log(teddies);
+	// console.log(teddies);
 	teddies.forEach((teddy) => addTeddyToList(teddy));
 	// creer fonction total
 	basketTotal(teddies);
@@ -52,12 +52,9 @@ function deleteTeddy(el) {
 	}
 }
 function showAlert(message, className) {
-	const div = document.createElement("div");
-	div.className = `alert alert-${className}`;
-	div.appendChild(document.createTextNode(message));
-	const container = document.querySelector(".container");
-	const form = document.getElementById("teddy-form");
-	container.insertBefore(div, form);
+	const div = document.getElementById("message");
+	div.className = `mt-3 alert alert-${className}`;
+	div.innerHTML = message;
 	// vanish in 3 seconds
 	setTimeout(() => document.querySelector(".alert").remove(), 3000);
 }
@@ -100,12 +97,11 @@ function checkOrder(){
 			products.push(teddies[i].id);
 		}
 	} 
-	// 
 	const jsonBody =  {
 		"contact": contact,
 		"products": products
 	};
-	console.log(jsonBody);
+	// console.log(jsonBody);
 	const url = "http://localhost:3000/api/teddies/order";
 	const options = {
 		method: "POST",
@@ -137,9 +133,8 @@ function contactInfo(){
 		"email" : document.getElementById("email").value,
 		"address" : document.getElementById("address").value,
 		"city" : document.getElementById("city").value
-		
 	}
-	console.log(contact);
+	// console.log(contact);
 	localStorage.setItem("contact", JSON.stringify(contact));	
 }
 
@@ -154,24 +149,25 @@ document.getElementById("basket-list").addEventListener("click", (e) => {
 	removeTeddy(
 		e.target.parentElement.parentElement.parentElement.firstChild.textContent
 		);
-		//calcul total
+		// Compute total
 		basketTotal(getTeddies());
 		
 		// show success message
-		showAlert("Teddy removed", "success");
+		showAlert("Peluche supprimée", "success");
 	});
 	
 // Event : Submit Contact info
 document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
     e.preventDefault();
-	console.log("Valider Contact");
-	// validation info contact
-	// dataUser validation
+	// empty basket
+	if(Number(document.querySelector("#total").innerText) === 0){
+		error = "Votre panier est vide";
+	};
+	// contact validation
 	if(!city.value || city.validity.typeMismatch){
 		error = "Merci de renseigner votre ville";
 		const city = document.getElementById("city")
 		city.style.backgroundColor="#fdecec";
-
 	};
 	if(!cp.value || cp.validity.patternMismatch){
 		error = "Merci de renseigner un code postal valide";
@@ -210,10 +206,7 @@ document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
 		writeTotal();
 		contactInfo();
 		checkOrder();
-		// window.location.href="confirmation.html";
 	};
-	// ----------------------
-
 });
 
 

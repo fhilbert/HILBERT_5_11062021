@@ -3,3 +3,40 @@ GET https://restcountries.eu/rest/v2
 GET https://restcountries.eu/data/afg.svg
 ###
 GET https://restcountries.eu/rest/v2/name=Afghanistan
+###
+POST https://api.github.com/user/repos
+Content-Type:application/json
+Authorization:Token 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
+
+{"name":"toto",
+"description":"nouveau repo"
+}
+###
+PATCH https://api.github.com/repos/fhilbert/toto
+Content-Type:application/json
+Authorization:Token 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
+
+{
+"name":"cnul",    
+"description":"modif repo"
+}
+###
+DELETE https://api.github.com/repos/fhilbert/cparti
+Content-Type:application/json
+Authorization:Token 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
+###
+GET https://restcountries.eu/rest/v2/all
+###
+GET https://restcountries.eu/rest/v2/name/france
+###
+GET https://restcountries.eu/data/fra.svg
+###
+PATCH https://api.github.com/repos/fhilbert/premier
+Content-Type:application/json
+Authorization:Token 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
+
+{
+"name":"python: sudoku",    
+"description":"resolution probleme sudoku"
+}
+

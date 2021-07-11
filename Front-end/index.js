@@ -1,11 +1,13 @@
 //index.js
 
+// Fetch products in the API teddies and create the cards for display
+
 fetch("http://localhost:3000/api/teddies")
 	.then((res) => res.json())
 	.then((data) => {
 		let output = `<h2>Faites votre choix :</h2>
 						  <div class="row">`;
-		data.forEach(function (teddy) {
+		data.forEach( (teddy) =>{
 			output += `
 					<div class="card-group col-12 col-lg-4">
 					  <div class="card mb-4 mb-lg-5 border-light shadow-sm">
