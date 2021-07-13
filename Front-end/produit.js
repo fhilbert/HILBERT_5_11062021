@@ -19,7 +19,8 @@ class Teddy {
 
 // console.log("id " + id);
 getTeddy();
-
+// ---- Tasks -----
+// ----------------
 // Fetch the chosen teddy from the API and create the card to display
 function getTeddy() {
 	fetch("http://localhost:3000/api/teddies/" + id)
@@ -54,8 +55,6 @@ function getTeddy() {
 		})
 		.catch(error => console.log("Erreur : " + error));
 }
-
-//  handle Tasks
 function showAlert(message, className) {
 	const div = document.getElementById("message");
 	div.className = `mt-3 alert alert-${className}`;
@@ -68,16 +67,13 @@ function getColor() {
 	console.log("couleur " + selectValue);
 	return selectValue;
 }
-
-// Handles storage
-
 // get teddies from the local storage
 function getTeddies() {
 	let teddies = [];
 
 	if (localStorage.getItem("teddies") === null) {
 		teddies = [];
-		console.log("teddies : " + teddies);
+		// console.log("teddies : " + teddies);
 	} else {
 		teddies = JSON.parse(localStorage.getItem("teddies"));
 	}

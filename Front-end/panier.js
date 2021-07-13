@@ -22,7 +22,6 @@ function basketTotal(teddies) {
 	const totalElt = document.querySelector("#total");
 	totalElt.innerText = `Total : ${total} €`;
 }
-
 function displayTeddies() {
 	const teddies = getTeddies();
 	// console.log(teddies);
@@ -60,8 +59,6 @@ function showAlert(message, className) {
 	// vanish in 3 seconds
 	setTimeout(() => document.querySelector(".alert").remove(), 3000);
 }
-
-// Handles Local storage
 
 function getTeddies() {
 	let teddies = [];
@@ -162,7 +159,7 @@ document.getElementById("basket-list").addEventListener("click", (e) => {
 document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
     e.preventDefault();
 	// empty basket
-	if(Number(document.querySelector("#total").innerText) === 0){
+	if(-) === 0){
 		error = "Votre panier est vide";
 	};
 	// contact validation
