@@ -1,6 +1,6 @@
 
 
-// remplir page
+// fill page
 const contact = JSON.parse(localStorage.getItem("contact"));
 const total = localStorage.getItem("total");
 const order = localStorage.getItem("order");
@@ -19,5 +19,6 @@ const city = document.querySelector("#city strong");
 city.innerText = contact.city;
 const email = document.querySelector("#email strong");
 email.innerText = contact.email;
+
 localStorage.clear();
 

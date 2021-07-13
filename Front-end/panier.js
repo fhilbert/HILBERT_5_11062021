@@ -20,7 +20,7 @@ function basketTotal(teddies) {
 		total += teddies[i].price * teddies[i].nbArticles;
 	}
 	const totalElt = document.querySelector("#total");
-	totalElt.innerText = total;
+	totalElt.innerText = `Total : ${total} €`;
 }
 
 function displayTeddies() {
@@ -33,6 +33,7 @@ function displayTeddies() {
 function addTeddyToList(teddy) {
 	const list = document.querySelector("#basket-list");
 	const row = document.createElement("tr");
+	const totalTeddy = teddy.nbArticles * teddy.price;
 
 	row.innerHTML = `<td>${teddy.id}</td>
             <td>
@@ -41,7 +42,8 @@ function addTeddyToList(teddy) {
 		    <td>${teddy.nom}</td>
 		    <td>${teddy.color}</td>
 		    <td>${teddy.nbArticles}</td>
-		    <td>${teddy.price}</td>
+		    <td>${teddy.price} €</td>
+		    <td style="text-align:right">${totalTeddy} €</td>
 		    <td><a href="#" class="btn btn-danger btn-sm
 		     "><i class="far fa-trash-alt delete"></i></a></td>`;
 	list.appendChild(row);
