@@ -83,16 +83,15 @@ function getTeddies() {
 function addTeddy(teddy) {
 	// console.log(teddy.nbArticles);
 	const teddies = getTeddies();
-	let a = "false";
+	let notfound = "true";
 	for (let i = 0; i < teddies.length; i++) {
 		if (teddies[i].id === id && teddies[i].color === teddy.color) {
 			teddies[i].nbArticles += teddy.nbArticles;
-			a = "true";
+			notfound = "false";
 		}
 	}
-	if (a !== "true") {
-		teddies.push(teddy);
-	}
+	if (notfound) {teddies.push(teddy);}
+
 	localStorage.setItem("teddies", JSON.stringify(teddies));
 }
 
@@ -121,3 +120,4 @@ document.querySelector("#order").addEventListener("click", (e) => {
 	const modal = document.querySelector("#modal");
 	modal.style.display = "block";
 });
+	

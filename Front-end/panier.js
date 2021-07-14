@@ -1,7 +1,5 @@
 // panier.js
-console.log("panier");
 
-// teddy class
 class Teddy {
 	constructor(id, image, nom, color, price, nbArticles) {
 		this.id = id;
@@ -16,11 +14,11 @@ let error = null;
 // Functions
 function basketTotal(teddies) {
 	let total = 0;
-	for (let i = 0; i < teddies.length; i++) {
-		total += teddies[i].price * teddies[i].nbArticles;
-	}
+	teddies.forEach(teddy => { total += teddy.price * teddy.nbArticles;	});
+
 	const totalElt = document.querySelector("#total");
 	totalElt.innerText = `Total : ${total} €`;
+	localStorage.setItem("total", total);
 }
 function displayTeddies() {
 	const teddies = getTeddies();
@@ -56,15 +54,14 @@ function showAlert(message, className) {
 	const div = document.getElementById("message");
 	div.className = `mt-3 alert alert-${className}`;
 	div.innerHTML = message;
-	// vanish in 3 seconds
-	setTimeout(() => document.querySelector(".alert").remove(), 3000);
+	// vanish in 4 seconds
+	setTimeout(() => document.querySelector(".alert").remove(), 4000);
 }
-
 function getTeddies() {
 	let teddies = [];
 	if (localStorage.getItem("teddies") === null) {
 		teddies = [];
-		console.log("teddies : " + teddies);
+		// console.log("teddies : " + teddies);
 	} else {
 		teddies = JSON.parse(localStorage.getItem("teddies"));
 	}
@@ -91,11 +88,10 @@ function checkOrder(){
 	const contact = JSON.parse(localStorage.getItem("contact"));
 
 	let products =[];
-	for(let i=0; i<teddies.length; i++){
-		for(j=0;j < teddies[i].nbArticles;j++){
-			products.push(teddies[i].id);
-		}
-	} 
+	teddies.forEach(teddy => { for (let i = 0; i < teddy.nbArticles; i++) {
+		products.push(teddy.id);
+	}
+	});
 	const jsonBody =  {
 		"contact": contact,
 		"products": products
@@ -120,10 +116,6 @@ function checkOrder(){
 
 	})
 	.catch(error => console.log("Erreur : " + error));
-}
-function writeTotal(){
-	const total = document.getElementById("total").innerText;
-	localStorage.setItem("total", total);
 }
 function contactInfo(){
 	let contact = {	
@@ -158,10 +150,6 @@ document.getElementById("basket-list").addEventListener("click", (e) => {
 // Event : Submit Contact info
 document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
     e.preventDefault();
-	// empty basket
-	if(-) === 0){
-		error = "Votre panier est vide";
-	};
 	// contact validation
 	if(!city.value || city.validity.typeMismatch){
 		error = "Merci de renseigner votre ville";
@@ -197,16 +185,18 @@ document.querySelector("#purchaseBtn").addEventListener("click", (e) => {
 		error = "Merci de renseigner une adresse email valide";
 		const email = document.getElementById("email")
 		email.style.backgroundColor="#fdecec";
-		};
+	};
+	// empty basket
+	if(Number(localStorage.getItem("total")) === 0){
+		error = "Votre panier est vide";
+	};
 	if (error){
 		document.querySelector("#error").innerHTML= error;
 		error = null;
 	} else {
-		writeTotal();
 		contactInfo();
 		checkOrder();
 	};
 });
-
 
 displayTeddies();
