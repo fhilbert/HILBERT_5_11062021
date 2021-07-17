@@ -104,7 +104,7 @@ document.querySelector("#order").addEventListener("click", (e) => {
 	const image = document.querySelector("#imageUrl").src;
 	const nom = document.querySelector("h5").innerText;
 	const color = getColor();
-	const price = Number(document.querySelector("#price").innerText);
+	const price = +document.querySelector("#price").innerText;
 	let nbArticles = Number(document.querySelector("#nbArticles").value);
 
 	if  (nbArticles<=0){

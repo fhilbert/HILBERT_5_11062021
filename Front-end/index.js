@@ -13,7 +13,7 @@ fetch("http://localhost:3000/api/teddies")
 					  <div class="card mb-4 mb-lg-5 border-light shadow-sm">
 					    <img src="${
 								teddy.imageUrl
-							}" alt="Card image cap" height= 75% class="card-img-top" >
+							}" alt="Card image cap" class="card-img-top" >
 					    <div class="card-body">
 					      <h5 class="card-title">${teddy.name}</h5>
 					      <p class="card-text">Prix : ${teddy.price.toFixed(2) / 100} €</p>

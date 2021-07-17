@@ -34,17 +34,19 @@ function addTeddyToList(teddy) {
 
 	row.innerHTML = `<td>${teddy.id}</td>
             <td>
-              <img src=${teddy.image} alt="Card image cap" width=60px height= 60px class="">
+              <img src=${teddy.image} alt="Card image cap" class="">
             </td>
 		    <td>${teddy.nom}</td>
 		    <td>${teddy.color}</td>
 		    <td>${teddy.nbArticles}</td>
 		    <td>${teddy.price} €</td>
-		    <td style="text-align:right">${totalTeddy} €</td>
+		    <td class="total">${totalTeddy} €</td>
 		    <td><a href="#" class="btn btn-danger btn-sm
 		     "><i class="far fa-trash-alt delete"></i></a></td>`;
 	list.appendChild(row);
 }
+{/* <td style="text-align:right">${totalTeddy} €</td> */}
+
 function deleteTeddy(el) {
 	if (el.classList.contains("delete")) {
 		el.parentElement.parentElement.parentElement.remove();
