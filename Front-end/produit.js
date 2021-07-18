@@ -83,11 +83,11 @@ function getTeddies() {
 function addTeddy(teddy) {
 	// console.log(teddy.nbArticles);
 	const teddies = getTeddies();
-	let notfound = "true";
+	let notfound = true;
 	for (let i = 0; i < teddies.length; i++) {
 		if (teddies[i].id === id && teddies[i].color === teddy.color) {
 			teddies[i].nbArticles += teddy.nbArticles;
-			notfound = "false";
+			notfound = false;
 		}
 	}
 	if (notfound) {teddies.push(teddy);}
